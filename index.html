@@ -248,7 +248,7 @@ h1 { animation:fu .6s .2s both; }
     
     <div class="work-card" onclick="openDrawer('residential')">
       <div class="wc-icon">🏗️</div>
-      <div class="wc-title">Residential & Multi-unit</div>
+      <div class="wc-title">Residential & Comercial</div>
       <div class="wc-sub">2022 — 2024 · Construction & Ongoing</div>
       <p class="wc-desc">Full electrical installation for new-build residential and comercial projects, maintenance and fault solver. Distribution boards, circuits and networking.</p>
       <div class="wc-tags"><span class="wc-tag">New Build</span><span class="wc-tag">Maintenance</span><span class="wc-tag">Electrical faults</span></div>
@@ -385,7 +385,7 @@ h1 { animation:fu .6s .2s both; }
 <script>
 const data = {
   port: {
-    eyebrow: '2022 — Present · Port Authority Concession · Mahón, Menorca',
+    eyebrow: '2024 — Present · Port Authority Concession · Mahón, Menorca',
     title: 'Port of Mahón Infrastructure',
     desc: 'I am in charge of the elctrical maintenance for the Port of Mahón — the largest natural harbour in the Mediterranean — planning and working with autonomy with a few supervisor checks during the year. During bigger tasks like streetlights installation or long section wiring I work with collegues. In my job position I manage on-site corrective & preventive maintenance, write techincal reports, manage online plataform of systems status and create or update electrical & topographic diagrams.',
     photos: [
@@ -408,7 +408,33 @@ const data = {
       'Coordination of external specialist contractors',
       'Draw electrical diagrams',
     ],
-    tags:['Shore Power','Marine Electrical','Public Lighting','CCTV','Access Control','Generator Sets','Switchboards','REBT','Autonomous Management', 'Critical infrastructure']
+  },
+  residential: {
+    eyebrow: '2022 — 2024 · Menorca',
+    title: 'Residential & Comercial',  
+    desc: 'Full electrical installations for new-buildings. Electrical faults solutions, upgrading old instalations and checking electrical risks.',
+    photos: [
+      { src:'img_res_1.jpg', label:'Switchboard for electrical machines' },
+      { src:'img_res_2.jpg', label:'Hotel distribuition board for floors' },
+    ],
+    details: [
+      'Full wiring from rough-in to final fit-out',
+      'Switchboards',
+      'Surge protectors',
+      'Full REBT compliance — circuits testing and mesurement',
+      'Coordination with construction teams and site supervisors',
+    ],
+  },
+  hotel: {
+    eyebrow: '2019 — 2020 · Son Bou, Menorca',
+    title: 'Hotels Maintenance',
+    desc: 'First professional role. Preventive and corrective electrical maintenance in a hotel environment. Foundation of the autonomous troubleshooting approach used throughout subsequent roles.',
+    details: [
+      'Preventive and corrective electrical maintenance',
+      'Guest rooms, common areas and technical installations',
+      'HVAC-related electrical systems',
+      'First structured exposure to fault diagnosis and independent problem solving',
+    ],
   },
   solar: {
     eyebrow: 'Residential & Commercial · Menorca',
@@ -419,46 +445,23 @@ const data = {
       { src:'img_solar_10.jpg', label:'Solar panels — second residential installation' },
       { src:'img_solar_11.jpg', label:'Commercial rooftop — large scale PV array' },
       { src:'img_solar_8.jpg', label:'Huawei SUN2000 — complete wall installation' },
-      { src:'img_solar_7.jpg', label:'Inverter + DC/AC boards — full installation' },
-      { src:'img_solar_6.jpg', label:'DC protection board — string fusing & surge protection' },
+      { src:'img_solar_7.jpg', label:'Invert wiring conne' },
     ],
     details: [
-      'Panel mounting on tile, flat and metal roof structures',
-      'Huawei SUN2000 inverter installation and commissioning',
-      'DC protection: string fusing, surge arresters (CPT) — labelled per string',
-      'AC protection: rearmable differential, surge protection, magnetothermic',
+      'Panel mounting on tile, flat and metal roof structures and flat grounds',
+      'Huawei inverters installation and setup',
+      'Victron Energy inverters',
+      'AC & DC switchboards, surge protections',
       'MC4 connector termination and PV cable routing',
-      'System commissioning and live monitoring via FusionSolar app',
-      'Power output verification: 6kW systems, 13+ panels per installation',
+      'Live monitoring',
+      'On-grid & Off-grid',
     ],
-    tags:['Solar PV','Huawei SUN2000','MC4','String Fusing','Surge Protection','DC/AC Protection','FusionSolar','System Commissioning']
   },
-  residential: {
-    eyebrow: '2020 — 2022 & Ongoing · Menorca',
-    title: 'Residential & Multi-unit',
-    desc: 'Full electrical installation for new-build residential and multi-unit developments. Complete scope from panel assembly to final fit-out, including multi-bungalow distribution boards with individual circuit protection per unit.',
-    photos: [
-      { src:'img_res_1.jpg', label:'Residential distribution board — Hager, new build' },
-      { src:'img_res_2.jpg', label:'Distribution board — wiring detail' },
-      { src:'img_res_3.jpg', label:'Distribution board — complete installation' },
-      { src:'img_res_4.jpg', label:'Multi-unit board — Bung.1–12 individual circuits' },
-      { src:'img_res_5.jpg', label:'Multi-unit board — assembled, pre-installation' },
-    ],
-    details: [
-      'Full wiring from rough-in to final fit-out',
-      'Distribution boards for individual residential units (up to 12 units per board)',
-      'Hager MCB, RCD and surge protection component installation',
-      'Full REBT compliance — differential, magnetothermic per circuit',
-      'Coordination with construction teams and site supervisors',
-    ],
-    tags:['New Build','REBT','Hager','Distribution Boards','RCD','MCB','Multi-unit']
-  },
-  thermal: {
+    thermal: {
     eyebrow: 'Residential · Smart Building Systems',
     title: 'Thermal & Building Systems',
-    desc: 'Thermal installation work using qualifications from the Higher Technician in Thermal & Fluid Systems. Includes smart radiant floor heating manifold systems with zone control, Ajax security system integration, and thermal camera commissioning to verify system operation.',
+    desc: 'Thermal installation work using qualifications from the Higher Technician in Thermal & Fluid Systems. Radiant floor heating manifold systems with smart zone control, thermal camera commissioning to verify system operation, integration in Smart Home Systems.',
     photos: [
-      { src:'img_therm_1.jpg', label:'Radiant floor manifold — zone control with Ajax integration' },
       { src:'img_therm_2.jpg', label:'FLIR thermal camera — floor heating verification' },
       { src:'img_therm_3.jpg', label:'FLIR E4 — thermal imaging of manifold system' },
       { src:'img_therm_4.jpg', label:'FLIR — floor heating distribution verification' },
@@ -466,39 +469,22 @@ const data = {
     details: [
       'Radiant floor heating manifold installation with labelled zone circuits',
       'Uponor actuator and zone control system wiring',
-      'Ajax security system integration (REX2 repeater)',
       'FLIR thermal camera commissioning — floor heating circuit verification',
       'Multi-room zone mapping and circuit labelling',
     ],
-    tags:['Radiant Floor','Uponor','Zone Control','FLIR Thermal','Building Systems']
-  },
-  hotel: {
-    eyebrow: '2019 — 2020 · Hotel',
-    title: 'Hotels Maintenance',
-    desc: 'First professional role. Preventive and corrective electrical maintenance in a hotel environment. Foundation of the autonomous troubleshooting approach used throughout subsequent roles.',
-    photos: [],
-    details: [
-      'Preventive and corrective electrical maintenance',
-      'Guest rooms, common areas and technical installations',
-      'HVAC-related electrical systems',
-      'First structured exposure to fault diagnosis and independent problem solving',
-    ],
-    tags:['Preventive Maintenance','Corrective Maintenance','HVAC Electrical','Hotel']
   },
   certs: {
     eyebrow: 'Education & Certifications',
     title: 'Qualifications',
     desc: 'Formal education combining hands-on vocational training with an ongoing university engineering degree — providing both practical depth and theoretical foundations.',
-    photos: [],
     details: [
       'Electrical Engineering Degree — UNED (in progress, 2nd year)',
-      'Higher Technician — Thermal & Fluid Installation Maintenance (GS)',
+      'Higher Technician in Thermal & Fluid Installation Maintenance (GS) — Refrigerant Gases Handling Certification',
       'Technician in Electromechanics (GM) — Low Voltage Certification access',
-      'Fire suppression systems certification',
-      'Refrigerant gas handling certification',
-      'German — A2 level, actively progressing toward B1',
+      'German — A1 level, actively progressing toward B1',
+      'Driving license (B — car)',
+      'Aerial Lift License',
     ],
-    tags:['Electrical Engineering','Low Voltage BT','Thermal Systems','Fire Suppression','Gas Handling','UNED']
   }
 };
 
