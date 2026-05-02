@@ -11,6 +11,35 @@
 
   gtag('config', 'G-ZSJYJ4XK3R');
 </script>
+
+<!-- Telegram bot -->
+<script>
+  const token = 8683911464:AAHk3K3ep_C6REf1XBmPWzkeYFS9P6BEhzo;
+  const myId = 341619284;
+
+  // Detectamos la procedencia
+  const comingFrom = document.referrer;
+  let sourceInfo = "";
+
+  if (comingFrom.includes("linkedin.com")) {
+    sourceInfo = "💼 VIENE DESDE LINKEDIN";
+  } else if (comingFrom === "") {
+    sourceInfo = "🔗 ENLACE DIRECTO (o privado)";
+  } else {
+    sourceInfo = "🌐 EXTERIOR: " + comingFrom;
+  }
+
+  const text = `
+🔔 *¡Nueva visita!*
+📍 *Origen:* ${sourceInfo}
+📱 *Dispositivo:* ${navigator.platform}
+🌍 *Idioma:* ${navigator.language}
+  `.trim();
+
+  fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${myId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`)
+    .catch(err => console.log("Error notification:", err));
+</script>  
+
   
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
