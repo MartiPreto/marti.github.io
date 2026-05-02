@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martí Preto — Electrical Technician</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F2F0EB;
+  --surface: #E8E5DE;
+  --border: #D4D0C8;
+  --text: #18170F;
+  --muted: #6B6858;
+  --green: #2D6A4F;
+  --drawer-w: min(560px, 100vw);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.1rem 2.5rem;
+  background:rgba(242,240,235,0.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-id { font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.nav-links { display:flex; gap:2rem; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; color:var(--muted); transition:color .2s; }
+.nav-links a:hover { color:var(--text); }
+
+/* HERO */
+.hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; padding:4rem 2.5rem 3rem; position:relative; overflow:hidden; }
+
+
+.hero-content { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; position:relative; z-index:1; }
+.hero-left { display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto auto auto; column-gap:1.75rem; align-items:start; }
+.hero-photo { grid-column:1; grid-row:1/3; width:130px; height:130px; border-radius:50%; border:2px solid var(--border); background:var(--surface); overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:3rem; flex-shrink:0; align-self:center; }
+.hero-photo img { width:100%; height:100%; object-fit:cover; }
+.eyebrow-line { width:32px; height:1px; background:var(--muted); }
+h1 { font-family:'Fraunces',serif; font-size:clamp(3rem,5.5vw,6rem); font-weight:300; line-height:.95; letter-spacing:-.02em; margin-bottom:.5rem; }
+h1 em { font-style:italic; color:var(--muted); }
+.hero-eyebrow { grid-column:2; grid-row:1; display:flex; align-items:center; gap:.75rem; font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:.5rem; }
+.hero-name-block { grid-column:2; grid-row:2; }
+.hero-sub-row { grid-column:1/3; grid-row:3; font-size:.95rem; color:var(--muted); max-width:480px; line-height:1.75; margin-bottom:2.5rem; margin-top:1.5rem; }
+.hero-actions { grid-column:1/3; grid-row:4; display:flex; gap:.75rem; flex-wrap:wrap; }
+.btn { font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; padding:.8rem 1.6rem; border:1px solid var(--text); background:transparent; color:var(--text); text-decoration:none; cursor:pointer; transition:all .22s; display:inline-flex; align-items:center; gap:.5rem; }
+.btn:hover { background:var(--text); color:var(--bg); }
+.btn-filled { background:var(--text); color:var(--bg); }
+.btn-filled:hover { background:transparent; color:var(--text); }
+.hero-right { display:flex; flex-direction:column; gap:1rem; padding-bottom:.5rem; }
+.stat-row { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+.stat-cell { background:var(--bg); padding:1.25rem 1.5rem; display:flex; flex-direction:column; justify-content:space-between; min-height:100px; }
+.stat-n { font-family:'Fraunces',serif; font-size:2rem; font-weight:300; line-height:1.1; }
+.stat-l { font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:auto; padding-top:.4rem; }
+.hero-age { font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:.5rem; }
+.status-pill { display:flex; align-items:center; gap:.75rem; padding:.9rem 1.25rem; background:var(--surface); border:1px solid var(--border); font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.08em; }
+.pulse { width:7px; height:7px; border-radius:50%; background:var(--green); animation:p 2s infinite; }
+@keyframes p { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero-bottom { display:flex; justify-content:space-between; align-items:flex-end; position:relative; z-index:1; padding-top:2rem; border-top:1px solid var(--border); }
+.scroll-hint { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:.75rem; }
+.scroll-arrow { animation:bounce 1.8s infinite; display:inline-block; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+.hero-tags { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:flex-end; }
+.htag { font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .75rem; border:1px solid var(--border); color:var(--muted); }
+
+/* SECTION */
+.section { padding:5rem 2.5rem; border-top:1px solid var(--border); }
+.sec-head { display:flex; align-items:baseline; gap:1.25rem; margin-bottom:3rem; }
+.sec-n { font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.1em; color:var(--muted); }
+.sec-t { font-family:'Fraunces',serif; font-size:1.9rem; font-weight:300; letter-spacing:-.02em; }
+.sec-line { flex:1; height:1px; background:var(--border); }
+
+/* WORK GRID */
+.work-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+.work-card { background:var(--bg); padding:2rem; cursor:pointer; position:relative; overflow:hidden; transition:background .2s; }
+.work-card::after { content:''; position:absolute; right:1.5rem; bottom:1.5rem; width:28px; height:28px; border:1px solid var(--border); border-radius:50%; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B6858' stroke-width='1.5'%3E%3Cpath d='M7 17L17 7M17 7H7M17 7v10'/%3E%3C/svg%3E") center/14px no-repeat; transition:all .2s; }
+.work-card:hover { background:var(--surface); }
+.work-card:hover::after { background-color:var(--text); border-color:var(--text); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5'%3E%3Cpath d='M7 17L17 7M17 7H7M17 7v10'/%3E%3C/svg%3E"); }
+.wc-icon { font-size:1.6rem; margin-bottom:1.25rem; }
+.wc-title { font-family:'Fraunces',serif; font-size:1.15rem; font-weight:300; margin-bottom:.5rem; line-height:1.2; }
+.wc-sub { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+.wc-desc { font-size:.82rem; color:var(--muted); line-height:1.65; margin-bottom:1.5rem; padding-right:2rem; }
+.wc-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+.wc-tag { font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .5rem; border:1px solid var(--border); color:var(--muted); }
+
+/* SKILLS */
+.skills-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+.skill-block { background:var(--bg); padding:1.75rem; }
+.sb-title { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem; padding-bottom:.75rem; border-bottom:1px solid var(--border); }
+.skill-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:.65rem; }
+.skill-name { font-size:.82rem; }
+.skill-bar-t { width:56px; height:2px; background:var(--border); position:relative; }
+.skill-bar-f { position:absolute; left:0; top:0; height:100%; background:var(--text); }
+
+/* CONTACT */
+.contact-wrap { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+.contact-l { background:var(--text); color:var(--bg); padding:3rem; }
+.contact-big { font-family:'Fraunces',serif; font-size:2.2rem; font-weight:300; line-height:1.1; margin-bottom:1.25rem; }
+.contact-big em { font-style:italic; opacity:.55; }
+.contact-p { font-size:.88rem; opacity:.6; line-height:1.75; margin-bottom:2.5rem; }
+.avail-tag { display:inline-block; font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .75rem; background:rgba(255,255,255,.12); color:white; margin-right:.5rem; margin-bottom:.5rem; }
+.contact-r { background:var(--bg); padding:3rem; display:flex; flex-direction:column; justify-content:center; gap:1.5rem; }
+.ci { padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.ci:last-child { border-bottom:none; padding-bottom:0; }
+.ci-label { font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:.25rem; }
+.ci-val { font-size:.92rem; font-weight:500; }
+.ci-val a { color:var(--text); text-decoration:none; border-bottom:1px solid var(--border); transition:border-color .2s; }
+.ci-val a:hover { border-color:var(--text); }
+
+/* DRAWER */
+.drawer-overlay { position:fixed; inset:0; z-index:300; background:rgba(24,23,15,0); pointer-events:none; transition:background .35s; }
+.drawer-overlay.open { background:rgba(24,23,15,.45); pointer-events:all; }
+.drawer { position:fixed; top:0; right:0; bottom:0; z-index:301; width:var(--drawer-w); background:var(--bg); border-left:1px solid var(--border); transform:translateX(100%); transition:transform .38s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; overflow:hidden; }
+.drawer.open { transform:translateX(0); }
+.drawer-header { padding:1.5rem 2rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0; }
+.drawer-eyebrow { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:.3rem; }
+.drawer-title { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:300; }
+.drawer-close { width:36px; height:36px; border:1px solid var(--border); background:transparent; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; font-size:1rem; }
+.drawer-close:hover { background:var(--text); color:var(--bg); border-color:var(--text); }
+.drawer-body { flex:1; overflow-y:auto; padding:2rem; }
+.drawer-body::-webkit-scrollbar { width:4px; }
+.drawer-body::-webkit-scrollbar-thumb { background:var(--border); }
+.drawer-desc { font-size:.9rem; color:var(--muted); line-height:1.75; margin-bottom:2rem; padding-bottom:2rem; border-bottom:1px solid var(--border); }
+.photo-grid { display:grid; gap:1px; background:var(--bg); border:1px solid var(--border); margin-bottom:2rem; }
+.photo-grid.cols-2 { grid-template-columns:1fr 1fr; }
+.photo-grid.cols-1 { grid-template-columns:1fr; }
+.photo-item { background:var(--bg); aspect-ratio:4/3; position:relative; overflow:hidden; cursor:pointer; }
+.photo-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.photo-item img { width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+.photo-item:hover img { transform:scale(1.04); }
+.photo-caption { position:absolute; bottom:0; left:0; right:0; padding:.6rem .75rem; background:rgba(24,23,15,.7); font-family:'DM Mono',monospace; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; color:white; opacity:0; transition:opacity .25s; }
+.photo-item:hover .photo-caption { opacity:1; }
+.drawer-detail-title { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; padding-bottom:.5rem; border-bottom:1px solid var(--border); }
+.detail-list { list-style:none; display:flex; flex-direction:column; gap:.6rem; margin-bottom:2rem; }
+.detail-list li { font-size:.85rem; color:var(--muted); padding-left:1rem; position:relative; line-height:1.6; }
+.detail-list li::before { content:'—'; position:absolute; left:0; color:var(--border); }
+.drawer-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+.dtag { font-family:'DM Mono',monospace; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; padding:.25rem .6rem; background:var(--text); color:var(--bg); }
+
+/* LIGHTBOX */
+.lightbox { position:fixed; inset:0; z-index:500; background:rgba(24,23,15,.92); display:none; align-items:center; justify-content:center; padding:2rem; }
+.lightbox.open { display:flex; }
+.lightbox img { max-width:100%; max-height:90vh; object-fit:contain; border:1px solid rgba(255,255,255,.1); }
+.lightbox-close { position:absolute; top:1.5rem; right:1.5rem; width:40px; height:40px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:white; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.lightbox-close:hover { background:rgba(255,255,255,.2); }
+
+/* FOOTER */
+footer { padding:1.75rem 2.5rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.foot-t { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.08em; color:var(--muted); }
+
+/* FADE */
+.fade-in { opacity:0; transform:translateY(18px); transition:opacity .55s ease,transform .55s ease; }
+.fade-in.vis { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  nav { padding:1rem 1.25rem; }
+  .nav-links { display:none; }
+  .hero { padding:5rem 1.25rem 2.5rem; }
+  .hero-content { grid-template-columns:1fr; gap:2rem; }
+  .hero-left { grid-template-columns:auto 1fr; column-gap:1rem; }
+  .hero-photo { width:90px; height:90px; font-size:2.2rem; }
+  .hero-sub-row { max-width:100%; }
+  .work-grid { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:1fr; }
+  .contact-wrap { grid-template-columns:1fr; }
+  .section { padding:3rem 1.25rem; }
+  footer { padding:1.25rem; flex-direction:column; gap:.5rem; text-align:center; }
+  .stat-row { grid-template-columns:1fr 1fr; }
+  h1 { font-size:clamp(2.4rem,10vw,4rem); }
+}
+
+/* HERO ENTRANCE */
+.hero-eyebrow { animation:fu .6s .1s both; }
+h1 { animation:fu .6s .2s both; }
+.hero-sub { animation:fu .6s .32s both; }
+.hero-actions { animation:fu .6s .44s both; }
+.hero-right { animation:fu .6s .38s both; }
+.hero-bottom { animation:fu .6s .5s both; }
+@keyframes fu { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-id">ET · Portfolio</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-photo" id="hero-photo">
+        <!-- Replace with: <img src="tu-foto.jpg" alt="Martí Preto"> -->
+        👤
+      </div>
+      <div class="hero-eyebrow"><span class="eyebrow-line"></span>Electrical & Automation Technician</div>
+      <div class="hero-name-block">
+        <h1>Martí<br><em>Preto</em></h1>
+        <p class="hero-age">23 years old</p>
+      </div>
+      <p class="hero-sub-row">Five years managing critical electrical infrastructure across port, solar, residential and hotel environments. Now focusing on electrical automation and electrical engineering. Relocating to Switzerland.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-filled">Get in touch</a>
+        <a href="#work" class="btn">View work ↓</a>
+        <a href="#skills" class="btn">View skills ↓</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-row">
+        <div class="stat-cell"><div class="stat-n">5+</div><div class="stat-l">Years exp.</div></div>
+        <div class="stat-cell"><div class="stat-n">Industrial Elect.</div><div class="stat-l">Objective</div></div>
+        <div class="stat-cell"><div class="stat-n">EFC/HF</div><div class="stat-l">Swiss Equivalence</div></div>
+        <div class="stat-cell"><div class="stat-n">Elect. Eng.</div><div class="stat-l">In Progress</div></div>
+      </div>
+      <div class="status-pill">
+        <div class="pulse"></div>
+        Menorca, Spain → Relocating to Switzerland
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <span class="scroll-hint"><span class="scroll-arrow">↓</span> Scroll to explore</span>
+    <div class="hero-tags">
+      <span class="htag">Low Voltage</span>
+      <span class="htag">Electromechanics</span>
+      <span class="htag">HVAC</span>
+      <span class="htag">Solar PV</span>
+      <span class="htag">Automation</span>
+      <span class="htag">PLC</span>
+    </div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="sec-head fade-in">
+    <span class="sec-n">01</span>
+    <h2 class="sec-t">Work & Experience</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="work-grid fade-in">
+
+    <div class="work-card" onclick="openDrawer('port')">
+      <div class="wc-icon">⚓</div>
+      <div class="wc-title">Port of Mahón Infrastructure</div>
+      <div class="wc-sub">2024 — Present · Port Authority Concession</div>
+      <p class="wc-desc">On-site Electrical Lead for critical port infrastructure. Expert in autonomous maintenance planning and technical coordination, ensuring operational efficiency in the Mediterranean’s largest natural harbours.</p>
+      <div class="wc-tags"><span class="wc-tag">Shore Power</span><span class="wc-tag">CCTV</span><span class="wc-tag">Access Control</span><span class="wc-tag">Generators</span></div>
+    </div>
+    
+    <div class="work-card" onclick="openDrawer('residential')">
+      <div class="wc-icon">🏗️</div>
+      <div class="wc-title">Residential & Comercial</div>
+      <div class="wc-sub">2022 — 2024 · Construction & Ongoing</div>
+      <p class="wc-desc">Full electrical installation for new-build residential and comercial projects, maintenance and fault solver. Distribution boards, circuits and networking.</p>
+      <div class="wc-tags"><span class="wc-tag">New Build</span><span class="wc-tag">Maintenance</span><span class="wc-tag">Electrical faults</span></div>
+    </div>
+
+    <div class="work-card" onclick="openDrawer('hotel')">
+      <div class="wc-icon">🏨</div>
+      <div class="wc-title">Hotels Maintenance</div>
+      <div class="wc-sub">2021 · Son Bou, Alaior. Menorca</div>
+      <p class="wc-desc">Preventive and corrective electrical maintenance in a hotel environment covering guest areas, technical rooms, pools and HVAC-related electrical systems.</p>
+      <div class="wc-tags"><span class="wc-tag">Preventive Maint.</span><span class="wc-tag">Guests care</span></div>
+    </div>
+
+    <div class="work-card" onclick="openDrawer('solar')">
+      <div class="wc-icon">☀️</div>
+      <div class="wc-title">Solar PV Installations</div>
+      <div class="wc-sub">Residential & Commercial · Menorca</div>
+      <p class="wc-desc">Full-scope photovoltaic installations including panel mounting, inverters setup, DC/AC protection boards, and system monitoring via app.</p>
+      <div class="wc-tags"><span class="wc-tag">Huawei</span><span class="wc-tag">Victron Energy</span><span class="wc-tag">String Fusing</span><span class="wc-tag">Monitoring</span></div>
+    </div>
+
+    <div class="work-card" onclick="openDrawer('thermal')">
+      <div class="wc-icon">🌡️</div>
+      <div class="wc-title">Thermal & Air Quality</div>
+      <div class="wc-sub">Residential · Smart Home Integration</div>
+      <p class="wc-desc">Radiant floor heating manifold systems with smart zone control</p>
+      <div class="wc-tags"><span class="wc-tag">Radiant Floor</span><span class="wc-tag">Water Heaters</span><span class="wc-tag">Pumps</span><span class="wc-tag">Zone Control</span></div>
+    </div>
+
+    <div class="work-card" onclick="openDrawer('certs')">
+      <div class="wc-icon">📋</div>
+      <div class="wc-title">Qualifications</div>
+      <div class="wc-sub">Education & Certifications</div>
+      <p class="wc-desc">Electrical Engineering degree in progress (UNED), Higher Technician in Thermal & Fluid systems, Technician in Electromechanics. Driving License 🚗, Aerial Lift License.</p>
+      <div class="wc-tags"><span class="wc-tag">BT Certified</span><span class="wc-tag">LOGO! SIEMENS</span><span class="wc-tag">Eng. Degree</span><span class="wc-tag">Driving</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="sec-head fade-in">
+    <span class="sec-n">02</span>
+    <h2 class="sec-t">Technical Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-block">
+      <div class="sb-title">Electrical</div>
+      <div class="skill-row"><span class="skill-name">Low Voltage Systems</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:95%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Switchboard Inspection</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:90%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Shore Power</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:85%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Solar PV Systems</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:80%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Ground conections</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:68%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">UPS Systems</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:70%"></div></div></div>
+      <p class="wc-desc">My objective is always to learn the most efficient way to work, keeping all the safety instructions and underestanding the way electricity works in each system to have fewer faults and solve them quicker.</p>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Control & Automation</div>
+      <div class="skill-row"><span class="skill-name">CCTV Systems</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:77%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Access Control</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:75%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Siemens LOGO!</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:70%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">TIA Portal (Currently Training)</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:25%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Fiber Optic, fusion splicing</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:40%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Networking</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:75%"></div></div></div>
+      <p class="wc-desc">I have a lot of personal interest in automation systems, learning throught my own research, and I usually learn fast new systems.</p>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Office Working</div>
+      <div class="skill-row"><span class="skill-name">Office Programs</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:90%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">AutoCAD (2D)</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:80%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Fluid Sim</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:70%"></div></div></div>
+      <p class="wc-desc">I find it easy to identify productive ways to improve at work, I am usually learning for my own projects and interests. I can manage databases, image editing, including AI tools to improve my own knowledge (always with caution regarding the errors they can bring). I adapt easily.</p>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Languages</div>
+      <div class="skill-row"><span class="skill-name">Spanish</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:100%"></div></div></div>
+<div class="skill-row"><span class="skill-name">Catalan</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:100%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">English</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:72%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">German In Progress(A1)</span><div class="skill-bar-t"><div class="skill-bar-f" style="width:22%"></div></div></div>      
+      <p class="wc-desc">My native languages are Catalan and Spanish, I can talk and have conversations with foreigners in English, also worked with some UK and Finland colleagues, but I have never taken an official level exam. I am currently practicing German to be able to work in Switzerland at my maximum performance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="sec-head fade-in">
+    <span class="sec-n">03</span>
+    <h2 class="sec-t">Contact</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="contact-wrap fade-in">
+    <div class="contact-l">
+      <h3 class="contact-big">Looking for a<br><em>long-term role</em><br>in Switzerland.</h3>
+      <p class="contact-p">Not a temporary experience — a permanent move. Open to industrial electrical maintenance, automation, and controls engineering roles in Zürich, Aargau, and Basel regions.</p>
+      <span class="avail-tag">Available from July - August of 2027 </span>
+      <span class="avail-tag">EU Citizen · Permit B</span>
+    </div>
+    <div class="contact-r">
+      <div class="ci"><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:martipreto02@gmail.com">martipreto02@gmail.com</a></div></div>
+      <div class="ci"><div class="ci-label">LinkedIn</div><div class="ci-val"><a href="https://linkedin.com/in/martipreto/" target="_blank">linkedin.com/in/martipreto/</a></div></div>
+      <div class="ci"><div class="ci-label">Location</div><div class="ci-val">Menorca, Spain → Switzerland</div></div>
+      <div class="ci"><div class="ci-label">Languages</div><div class="ci-val">Spanish · English (B2) · German in progress (A1)</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="foot-t">Martí Preto · Electrical & Automation Technician & Engineer</span>
+  <span class="foot-t">Open to opportunities in Switzerland · 2026</span>
+</footer>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-eyebrow" id="d-eyebrow"></div>
+      <div class="drawer-title" id="d-title"></div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body" id="d-body"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+const data = {
+  port: {
+    eyebrow: '2024 — Present · Port Authority Concession · Mahón, Menorca',
+    title: 'Port of Mahón Infrastructure',
+    desc: 'I am in charge of the elctrical maintenance for the Port of Mahón — the largest natural harbour in the Mediterranean — planning and working with autonomy with a few supervisor checks during the year. During bigger tasks like streetlights installation or long section wiring I work with collegues. In my job position I manage on-site corrective & preventive maintenance, write techincal reports, manage online plataform of systems status and create or update electrical & topographic diagrams.',
+    photos: [
+      { src:'img_port_5.jpg', label:'Shore power column — Mennekes marine connectors' },
+      { src:'img_port_9.jpg', label:'Shore power pedestal — vessel connection point' },
+      { src:'img_port_1.jpg', label:'Shore power distribution panel' },
+      { src:'img_port_2.jpg', label:'Pump switchboard — Control' },
+      { src:'img_port_4.jpg', label:'Pump switchboard — Wiring' },
+      { src:'img_port_6.jpg', label:'Double IP factor and security' },
+      { src:'img_port_8.jpg', label:'Port switchboard — 160A Hager main breakers' },
+    ],
+    details: [
+      'Shore power management for boats',
+      'Public lighting maintenance across the entire port perimeter',
+      'Emergency generator sets: operation, testing and maintenance',
+      'CCTV surveillance: configuration, maintenance and fault resolution',
+      'Automated access control and automatic gate systems',
+      'Electrical safety inspections — REBT compliance',
+      'Preventive maintenance planning and technical report writing',
+      'Coordination of external specialist contractors',
+      'Draw electrical diagrams',
+    ],
+    tags: [],
+  },
+  residential: {
+    eyebrow: '2022 — 2024 · Menorca',
+    title: 'Residential & Comercial',  
+    desc: 'Full electrical installations for new-buildings. Electrical faults solutions, upgrading old instalations and checking electrical risks.',
+    photos: [
+      { src:'img_res_1.jpg', label:'Switchboard for electrical machines' },
+      { src:'img_res_2.jpg', label:'Hotel distribuition board for floors' },
+    ],
+    details: [
+      'Full wiring from rough-in to final fit-out',
+      'Switchboards',
+      'Surge protectors',
+      'Full REBT compliance — circuits testing and mesurement',
+      'Coordination with construction teams and site supervisors',
+    ],
+    tags: [],
+  },
+  hotel: {
+    eyebrow: '2019 — 2020 · Son Bou, Menorca',
+    title: 'Hotels Maintenance',
+    desc: 'First professional role. Preventive and corrective electrical maintenance in a hotel environment. Foundation of the autonomous troubleshooting approach used throughout subsequent roles.',
+    photos: [],
+    details: [
+      'Preventive and corrective electrical maintenance',
+      'Guest rooms, common areas and technical installations',
+      'HVAC-related electrical systems',
+      'First structured exposure to fault diagnosis and independent problem solving',
+    ],
+    tags: [],
+  },
+  solar: {
+    eyebrow: 'Residential & Commercial · Menorca',
+    title: 'Solar PV Installations',
+    desc: 'Full-scope photovoltaic installations across multiple residential and commercial properties in Menorca. Complete scope from panel mounting through to inverter setup, DC/AC protection boards, string fusing, and live system monitoring via Huawei FusionSolar app.',
+    photos: [
+      { src:'img_solar_9.jpg', label:'Solar panels — rooftop installation with sea view' },
+      { src:'img_solar_10.jpg', label:'Solar panels — second residential installation' },
+      { src:'img_solar_11.jpg', label:'Commercial rooftop — large scale PV array' },
+      { src:'img_solar_8.jpg', label:'Huawei SUN2000 — complete wall installation' },
+      { src:'img_solar_7.jpg', label:'Invert wiring conne' },
+    ],
+    details: [
+      'Panel mounting on tile, flat and metal roof structures and flat grounds',
+      'Huawei inverters installation and setup',
+      'Victron Energy inverters',
+      'AC & DC switchboards, surge protections',
+      'MC4 connector termination and PV cable routing',
+      'Live monitoring',
+      'On-grid & Off-grid',
+    ],
+    tags: [],
+  },
+    thermal: {
+    eyebrow: 'Residential · Smart Building Systems',
+    title: 'Thermal & Building Systems',
+    desc: 'Thermal installation work using qualifications from the Higher Technician in Thermal & Fluid Systems. Radiant floor heating manifold systems with smart zone control, thermal camera commissioning to verify system operation, integration in Smart Home Systems.',
+    photos: [
+      { src:'img_therm_2.jpg', label:'FLIR thermal camera — floor heating verification' },
+      { src:'img_therm_3.jpg', label:'FLIR E4 — thermal imaging of manifold system' },
+      { src:'img_therm_4.jpg', label:'FLIR — floor heating distribution verification' },
+    ],
+    details: [
+      'Radiant floor heating manifold installation with labelled zone circuits',
+      'Uponor actuator and zone control system wiring',
+      'FLIR thermal camera commissioning — floor heating circuit verification',
+      'Multi-room zone mapping and circuit labelling',
+    ],
+    tags: [],
+  },
+  certs: {
+    eyebrow: 'Education & Certifications',
+    title: 'Qualifications',
+    desc: 'Formal education combining hands-on vocational training with an ongoing university engineering degree — providing both practical depth and theoretical foundations.',
+    photos: [],
+    details: [
+      'Electrical Engineering Degree — UNED (in progress, 2nd year)',
+      'Higher Technician in Thermal & Fluid Installation Maintenance (GS) — Refrigerant Gases Handling Certification',
+      'Technician in Electromechanics (GM) — Low Voltage Certification access',
+      'German — A1 level, actively progressing toward B1',
+      'Driving license (B — car)',
+      'Aerial Lift License',
+    ],
+    tags: [],
+  }
+};
+
+function openDrawer(id) {
+  const d = data[id];
+  document.getElementById('d-eyebrow').textContent = d.eyebrow;
+  document.getElementById('d-title').textContent = d.title;
+  let html = `<p class="drawer-desc">${d.desc}</p>`;
+  if (d.photos.length > 0) {
+    html += `<p class="drawer-detail-title">Photos & Documentation</p>`;
+    const cols = d.photos.length === 1 ? 'cols-1' : 'cols-2';
+    html += `<div class="photo-grid ${cols}">`;
+    d.photos.forEach(p => {
+      html += `<div class="photo-item" onclick="openLightbox('${p.src}')">
+        <img src="${p.src}" alt="${p.label}" loading="lazy">
+        <div class="photo-caption">${p.label}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  html += `<p class="drawer-detail-title">Scope & Responsibilities</p><ul class="detail-list">`;
+  d.details.forEach(i => { html += `<li>${i}</li>`; });
+  html += `</ul>`;
+  if (d.tags && d.tags.length > 0) {
+    html += `<p class="drawer-detail-title">Keywords</p><div class="drawer-tags">`;
+    d.tags.forEach(t => { html += `<span class="dtag">${t}</span>`; });
+    html += `</div>`;
+  }
+  document.getElementById('d-body').innerHTML = html;
+  document.getElementById('d-body').scrollTop = 0;
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openLightbox(src) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  event.stopPropagation();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeDrawer(); closeLightbox(); }
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} });
+}, {threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
