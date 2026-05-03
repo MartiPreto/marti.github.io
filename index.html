@@ -19,30 +19,36 @@
     const token = "8683911464:AAHk3K3ep_C6REf1XBmPWzkeYFS9P6BEhzo";
     const myId = "341619284";
 
-    // 1. Consultamos la ubicación basada en la IP
-    fetch('https://ipapi.co/json/')
-      .then(response => response.json())
-      .then(data => {
-        const city = data.city || "Desconocida";
-        const country = data.country_name || "Desconocido";
-        const org = data.org || "Desconocido"; // Esto a veces dice el nombre de la empresa (ej: Telefónica)
-        
-        const referrer = document.referrer || "Enlace directo";
-        let source = referrer.includes("linkedin.com") ? "💼 LINKEDIN" : "🌐 EXTERIOR";
+    const urlParams = new URLSearchParams(window.location.search);
+    const refTag = urlParams.get('ref'); // Buscamos nuestra etiqueta personalizada
+    const referrer = document.referrer.toLowerCase();
 
-        // 2. Montamos el mensaje con la ubicación
+    let source = "🌐 EXTERIOR / DIRECTO";
+
+    // Lógica de detección avanzada
+    if (refTag === 'linkedin' || referrer.includes("linkedin")) {
+      source = "💼 LINKEDIN";
+    } else if (refTag === 'whatsapp' || referrer.includes("whatsapp") || referrer.includes("wa.me")) {
+      source = "🟢 WHATSAPP";
+    } else if (refTag === 'gmail' || referrer.includes("mail.google")) {
+      source = "📧 GMAIL";
+    } else if (refTag === 'cv') {
+      source = "📄 DESDE TU CV (PDF)";
+    }
+
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
         const text = `
 🚀 *¡Nueva visita!*
-📍 *Origen:* ${source}
-🌍 *Ubicación:* ${city}, ${country}
-🏢 *ISP/Empresa:* ${org}
+📍 *Canal:* ${source}
+🌍 *Ubicación:* ${data.city}, ${data.country_name}
+🏢 *ISP:* ${data.org}
 📱 *Dispositivo:* ${navigator.platform}
         `.trim();
 
-        // 3. Enviamos a Telegram
-        return fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${myId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`);
-      })
-      .catch(err => console.error("Error en el rastreo:", err));
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${myId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`);
+      });
   })();
 </script>
 
